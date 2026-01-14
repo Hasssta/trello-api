@@ -1,0 +1,13 @@
+{
+  "name": "trello-api",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "hasssta nodejs mern stack",
+  "main": "src/server.js",
+  "author": "hasssta",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
