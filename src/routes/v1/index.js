@@ -1,6 +1,8 @@
 import express from 'express'
 import { StatusCodes } from 'http-status-codes'
-import { boardRoutes } from '~/routes/v1/boardRoutes'
+import { boardRoute } from '~/routes/v1/boardRoute'
+
+// file v1/index.js sẽ là file đại diện cho tất cả các route của API v1
 
 const Router = express.Router()
 
@@ -12,7 +14,7 @@ Router.get('/status', (req, res) => {
   })
 })
 
-// Board APIs
-Router.use('/boards', boardRoutes)
+// Board APIs - những API liên quan tới Board sẽ được tách riêng ra một file boardRoute.js để dễ quản lý và bảo trì, sau đó import vào đây và sử dụng như bình thường
+Router.use('/boards', boardRoute)
 
 export const APIs_V1 = Router

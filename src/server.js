@@ -5,6 +5,7 @@ import exitHook from 'async-exit-hook'
 import { CONNECT_DB, CLOSE_DB } from '~/config/mongodb'
 import { env } from '~/config/environment.js'
 import { APIs_V1 } from '~/routes/v1'
+import { errorHandlingMiddleware } from '~/middlewares/errorHandlingMiddleware.js'
 
 const START_SERVER = () => {
   const app = express()
@@ -14,14 +15,21 @@ const START_SERVER = () => {
   //   res.end('<h1>Hello World!</h1><hr>')
   // })
 
+  // enable req.body json data
+  app.use(express.json())
+
+  // Use API v1 với "/v1"
   app.use('/v1', APIs_V1)
+
+  // Middleware xu li loi tap trung
+  app.use(errorHandlingMiddleware)
 
   app.listen(env.APP_PORT, env.APP_HOST, () => {
     // eslint-disable-next-line no-console
-    console.log(`3. Hello ${env.AUTHOR}, Back-end server is running successfully at Host: ${ env.APP_HOST } and Port: ${ env.APP_PORT }`)
+    console.log(`3. Hello ${env.AUTHOR}, Back-end server is running successfully at Host: ${env.APP_HOST} and Port: ${env.APP_PORT}`)
   })
 
-  // Thuc hien tac dung clean up truoc khi thoat ung dung
+  // Thuc hien tac dung clean up truoc khi thoat ung dung https://stackoverflow.com/questions/14031763/doing-a-cleanup-action-just-before-node-js-exits
   exitHook(() => {
     console.log('4. Server is shutting down')
     CLOSE_DB()
