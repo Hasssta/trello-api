@@ -27,7 +27,7 @@ export const CLOSE_DB = async () => {
   await mongoClientInstance.close()
 }
 
-// Function GET_DB (khong async) nya co nhiem vu export ra Trello Database instance sau khi da connect thanh cong toi mongoDB de chung ta su dung o nhieu noi khac nhau trong code
+// Function GET_DB (khong async) nay co nhiem vu export ra Trello Database instance sau khi da connect thanh cong toi mongoDB de chung ta su dung o nhieu noi khac nhau trong code
 // Luu y: phai dam bao chi luon goi GET_DB sau khi da goi CONNECT_DB thanh cong
 export const GET_DB = () => {
   if (!trelloDatabaseInstance) throw new Error('You must connect to Database first!')
